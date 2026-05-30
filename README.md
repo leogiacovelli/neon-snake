@@ -1,6 +1,10 @@
 # 🐍 Neon Snake
 
+### ▶️ [**Play it live**](https://leogiacovelli.github.io/neon-snake/) &nbsp;·&nbsp; no install, runs in your browser
+
 A modern, juicy take on the classic Snake — built from scratch with **vanilla JavaScript + Canvas**, bundled with **Vite**. No game engine, no asset files, no runtime dependencies. The whole thing ships as **~9 KB of gzipped JS**.
+
+[![Play now](https://img.shields.io/badge/▶_Play_now-leogiacovelli.github.io%2Fneon--snake-56ffc2?style=for-the-badge)](https://leogiacovelli.github.io/neon-snake/)
 
 ![mode: classic · wrap · maze](https://img.shields.io/badge/modes-classic%20·%20wrap%20·%20maze-56ffc2)
 ![deps: 0 runtime](https://img.shields.io/badge/runtime%20deps-0-38d9ff)
