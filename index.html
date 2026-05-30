@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#070b15" />
+    <meta
+      name="description"
+      content="Neon Snake — a modern, juicy take on the classic Snake. Power-ups, mazes, combos and particles."
+    />
+    <title>Neon Snake</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="stage">
+        <canvas id="game" aria-label="Neon Snake game board"></canvas>
+
+        <!-- HUD -->
+        <header id="hud" class="hud" hidden>
+          <div class="hud-cell">
+            <span class="hud-label">Score</span>
+            <span id="hud-score" class="hud-value">0</span>
+          </div>
+          <div class="hud-cell">
+            <span class="hud-label">Best</span>
+            <span id="hud-best" class="hud-value">0</span>
+          </div>
+          <div class="hud-cell">
+            <span class="hud-label">Level</span>
+            <span id="hud-level" class="hud-value">1</span>
+          </div>
+          <div class="hud-cell hud-combo" id="hud-combo-wrap" hidden>
+            <span class="hud-label">Combo</span>
+            <span id="hud-combo" class="hud-value">x1</span>
+          </div>
+        </header>
+
+        <!-- Active power-up pips -->
+        <div id="powerups" class="powerups" aria-hidden="true"></div>
+
+        <!-- On-screen pause button (mobile) -->
+        <button id="pause-btn" class="icon-btn" hidden aria-label="Pause">II</button>
+
+        <!-- Overlays -->
+        <div id="overlay" class="overlay">
+          <!-- Menu -->
+          <section class="panel" data-screen="menu">
+            <h1 class="title">NEON<span>SNAKE</span></h1>
+            <p class="subtitle">Eat. Grow. Survive. Don't bite yourself.</p>
+
+            <div class="field">
+              <span class="field-label">Mode</span>
+              <div class="seg" id="mode-select" role="tablist">
+                <button class="seg-btn is-active" data-mode="classic">Classic</button>
+                <button class="seg-btn" data-mode="wrap">Wrap</button>
+                <button class="seg-btn" data-mode="maze">Maze</button>
+              </div>
+              <p class="field-hint" id="mode-hint">Walls are deadly. Pure & ruthless.</p>
+            </div>
+
+            <div class="field">
+              <span class="field-label">Speed</span>
+              <div class="seg" id="speed-select" role="tablist">
+                <button class="seg-btn" data-speed="chill">Chill</button>
+                <button class="seg-btn is-active" data-speed="normal">Normal</button>
+                <button class="seg-btn" data-speed="insane">Insane</button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="play-btn">PLAY</button>
+
+            <div class="menu-foot">
+              <button class="link" id="sound-toggle" aria-pressed="true">🔊 Sound: On</button>
+              <span class="hint">WASD / Arrows · Space to pause</span>
+            </div>
+          </section>
+
+          <!-- Pause -->
+          <section class="panel" data-screen="paused" hidden>
+            <h2 class="panel-title">Paused</h2>
+            <button class="btn btn-primary" id="resume-btn">Resume</button>
+            <button class="btn" id="quit-btn">Quit to menu</button>
+          </section>
+
+          <!-- Game over -->
+          <section class="panel" data-screen="gameover" hidden>
+            <h2 class="panel-title">Game Over</h2>
+            <div class="result">
+              <div class="result-row">
+                <span>Score</span><strong id="final-score">0</strong>
+              </div>
+              <div class="result-row">
+                <span>Best</span><strong id="final-best">0</strong>
+              </div>
+              <div class="result-row">
+                <span>Length</span><strong id="final-length">3</strong>
+              </div>
+            </div>
+            <p class="new-best" id="new-best" hidden>★ New best! ★</p>
+            <button class="btn btn-primary" id="retry-btn">Play again</button>
+            <button class="btn" id="menu-btn">Menu</button>
+          </section>
+        </div>
+
+        <!-- Mobile swipe hint, shown briefly on touch devices -->
+        <div id="touch-hint" class="touch-hint" hidden>Swipe to steer</div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
