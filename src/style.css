@@ -401,9 +401,9 @@ canvas {
 .dpad {
   display: none;
   position: relative;
-  width: 180px;
-  height: 180px;
-  border-radius: 22px;
+  width: 220px;
+  height: 220px;
+  border-radius: 26px;
   background: rgba(10, 16, 32, 0.75);
   border: 1px solid var(--line);
   backdrop-filter: blur(8px);
@@ -433,15 +433,15 @@ canvas {
 .dpad-arrow {
   position: absolute;
   color: var(--muted);
-  font-size: 20px;
+  font-size: 26px;
   pointer-events: none;
   transition: color 0.08s, text-shadow 0.08s;
   line-height: 1;
 }
-.dpad-up    { top: 10px;    left: 50%; transform: translateX(-50%); }
-.dpad-down  { bottom: 10px; left: 50%; transform: translateX(-50%); }
-.dpad-left  { left: 10px;   top: 50%;  transform: translateY(-50%); }
-.dpad-right { right: 10px;  top: 50%;  transform: translateY(-50%); }
+.dpad-up    { top: 12px;    left: 50%; transform: translateX(-50%); }
+.dpad-down  { bottom: 12px; left: 50%; transform: translateX(-50%); }
+.dpad-left  { left: 12px;   top: 50%;  transform: translateY(-50%); }
+.dpad-right { right: 12px;  top: 50%;  transform: translateY(-50%); }
 
 /* Active direction highlights the matching arrow */
 .dpad[data-dir="up"]    .dpad-up,
@@ -465,7 +465,7 @@ canvas {
   }
 
   .stage {
-    width: min(96vw, calc(100svh - 220px));
+    width: min(96vw, calc(100svh - 268px));
     border-radius: 12px;
   }
 
@@ -530,7 +530,7 @@ canvas {
 
   .dpad {
     display: block;
-    width: 148px;
-    height: 148px;
+    width: 170px;
+    height: 170px;
   }
 }
