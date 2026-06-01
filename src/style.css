@@ -397,9 +397,95 @@ canvas {
   }
 }
 
-@media (max-width: 480px) {
+/* ---------- D-pad ---------- */
+.dpad {
+  display: none;
+  grid-template-areas:
+    ". up ."
+    "left . right"
+    ". down .";
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  width: 168px;
+  height: 168px;
+  flex-shrink: 0;
+}
+
+.dpad-btn {
+  border: 1px solid var(--line);
+  background: rgba(10, 16, 32, 0.75);
+  color: var(--ink);
+  font-size: 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.08s, transform 0.08s, box-shadow 0.08s;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.dpad-btn:active {
+  transform: scale(0.86);
+  background: rgba(86, 255, 194, 0.18);
+  box-shadow: 0 0 18px rgba(86, 255, 194, 0.3);
+}
+
+.dpad-up    { grid-area: up; }
+.dpad-left  { grid-area: left; }
+.dpad-right { grid-area: right; }
+.dpad-down  { grid-area: down; }
+
+/* ---------- Portrait touch: stack stage + d-pad vertically ---------- */
+@media (pointer: coarse) and (orientation: portrait) {
+  #app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+  }
+
   .stage {
-    width: 96vw;
-    border-radius: 0;
+    width: min(96vw, calc(100svh - 220px));
+    border-radius: 12px;
+  }
+
+  .dpad {
+    display: grid;
+  }
+
+  .icon-btn {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ---------- Landscape touch: stage + d-pad side by side ---------- */
+@media (pointer: coarse) and (orientation: landscape) {
+  #app {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-left: calc(env(safe-area-inset-left) + 8px);
+    padding-right: calc(env(safe-area-inset-right) + 8px);
+  }
+
+  .stage {
+    width: min(88vmin, calc(100svh - 32px), 720px);
+    aspect-ratio: 1 / 1;
+  }
+
+  .dpad {
+    display: grid;
+    width: 148px;
+    height: 148px;
   }
 }

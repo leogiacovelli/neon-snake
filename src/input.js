@@ -34,6 +34,22 @@ export class Input {
     const t = this.target;
     t.addEventListener('touchstart', (e) => this.touchStart(e), { passive: false });
     t.addEventListener('touchend', (e) => this.touchEnd(e), { passive: false });
+
+    // D-pad buttons
+    document.querySelectorAll('.dpad-btn[data-dx]').forEach((btn) => {
+      const dx = parseInt(btn.dataset.dx, 10);
+      const dy = parseInt(btn.dataset.dy, 10);
+      btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        this.onGesture();
+        this.game.turn(dx, dy);
+      }, { passive: false });
+      btn.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        this.game.turn(dx, dy);
+      });
+    });
+
     // First pointer/touch anywhere unlocks audio.
     const wake = () => this.onGesture();
     window.addEventListener('pointerdown', wake, { once: true });

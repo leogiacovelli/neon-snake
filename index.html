@@ -15,7 +15,7 @@
   </head>
   <body>
     <div id="app">
-      <div class="stage">
+      <div class="stage" id="stage">
         <canvas id="game" aria-label="Neon Snake game board"></canvas>
 
         <!-- HUD -->
@@ -106,7 +106,15 @@
         </div>
 
         <!-- Mobile swipe hint, shown briefly on touch devices -->
-        <div id="touch-hint" class="touch-hint" hidden>Swipe to steer</div>
+        <div id="touch-hint" class="touch-hint" hidden>Tap arrows or swipe to steer</div>
+      </div>
+
+      <!-- On-screen D-pad (touch devices only, shown via CSS) -->
+      <div id="dpad" class="dpad" aria-label="Directional controls">
+        <button class="dpad-btn dpad-up"    data-dx="0"  data-dy="-1" aria-label="Up">▲</button>
+        <button class="dpad-btn dpad-left"  data-dx="-1" data-dy="0"  aria-label="Left">◀</button>
+        <button class="dpad-btn dpad-right" data-dx="1"  data-dy="0"  aria-label="Right">▶</button>
+        <button class="dpad-btn dpad-down"  data-dx="0"  data-dy="1"  aria-label="Down">▼</button>
       </div>
     </div>
 
