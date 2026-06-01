@@ -35,20 +35,36 @@ export class Input {
     t.addEventListener('touchstart', (e) => this.touchStart(e), { passive: false });
     t.addEventListener('touchend', (e) => this.touchEnd(e), { passive: false });
 
-    // D-pad buttons
-    document.querySelectorAll('.dpad-btn[data-dx]').forEach((btn) => {
-      const dx = parseInt(btn.dataset.dx, 10);
-      const dy = parseInt(btn.dataset.dy, 10);
-      btn.addEventListener('touchstart', (e) => {
+    // D-pad: unified touch zone — touch position relative to center drives direction
+    const dpad = document.getElementById('dpad');
+    if (dpad) {
+      const dirFrom = (touch) => {
+        const r = dpad.getBoundingClientRect();
+        const dx = touch.clientX - (r.left + r.width / 2);
+        const dy = touch.clientY - (r.top + r.height / 2);
+        return Math.abs(dx) > Math.abs(dy)
+          ? [Math.sign(dx), 0]
+          : [0, Math.sign(dy)];
+      };
+      const nameOf = ([dx, dy]) =>
+        dy < 0 ? 'up' : dy > 0 ? 'down' : dx < 0 ? 'left' : 'right';
+      const apply = (e) => {
+        const dir = dirFrom(e.changedTouches[0]);
+        this.game.turn(dir[0], dir[1]);
+        dpad.dataset.dir = nameOf(dir);
+      };
+      dpad.addEventListener('touchstart', (e) => {
         e.preventDefault();
         this.onGesture();
-        this.game.turn(dx, dy);
+        apply(e);
       }, { passive: false });
-      btn.addEventListener('mousedown', (e) => {
+      dpad.addEventListener('touchmove', (e) => {
         e.preventDefault();
-        this.game.turn(dx, dy);
-      });
-    });
+        apply(e);
+      }, { passive: false });
+      dpad.addEventListener('touchend', () => { dpad.dataset.dir = ''; });
+      dpad.addEventListener('touchcancel', () => { dpad.dataset.dir = ''; });
+    }
 
     // First pointer/touch anywhere unlocks audio.
     const wake = () => this.onGesture();

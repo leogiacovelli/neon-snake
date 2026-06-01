@@ -397,47 +397,60 @@ canvas {
   }
 }
 
-/* ---------- D-pad ---------- */
+/* ---------- D-pad (unified touch zone) ---------- */
 .dpad {
   display: none;
-  grid-template-areas:
-    ". up ."
-    "left . right"
-    ". down .";
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 8px;
-  width: 168px;
-  height: 168px;
-  flex-shrink: 0;
-}
-
-.dpad-btn {
-  border: 1px solid var(--line);
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 22px;
   background: rgba(10, 16, 32, 0.75);
-  color: var(--ink);
-  font-size: 22px;
-  border-radius: 14px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid var(--line);
   backdrop-filter: blur(8px);
-  touch-action: manipulation;
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
-  transition: background 0.08s, transform 0.08s, box-shadow 0.08s;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 24px rgba(0,0,0,0.4);
+  transition: box-shadow 0.1s;
 }
-.dpad-btn:active {
-  transform: scale(0.86);
-  background: rgba(86, 255, 194, 0.18);
-  box-shadow: 0 0 18px rgba(86, 255, 194, 0.3);
+.dpad:active {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 0 1px rgba(86, 255, 194, 0.25),
+    0 0 24px rgba(86, 255, 194, 0.15);
+}
+/* center dot */
+.dpad::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+  pointer-events: none;
 }
 
-.dpad-up    { grid-area: up; }
-.dpad-left  { grid-area: left; }
-.dpad-right { grid-area: right; }
-.dpad-down  { grid-area: down; }
+.dpad-arrow {
+  position: absolute;
+  color: var(--muted);
+  font-size: 20px;
+  pointer-events: none;
+  transition: color 0.08s, text-shadow 0.08s;
+  line-height: 1;
+}
+.dpad-up    { top: 10px;    left: 50%; transform: translateX(-50%); }
+.dpad-down  { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.dpad-left  { left: 10px;   top: 50%;  transform: translateY(-50%); }
+.dpad-right { right: 10px;  top: 50%;  transform: translateY(-50%); }
+
+/* Active direction highlights the matching arrow */
+.dpad[data-dir="up"]    .dpad-up,
+.dpad[data-dir="down"]  .dpad-down,
+.dpad[data-dir="left"]  .dpad-left,
+.dpad[data-dir="right"] .dpad-right {
+  color: var(--accent);
+  text-shadow: 0 0 14px var(--accent);
+}
 
 /* ---------- Portrait touch: stack stage + d-pad vertically ---------- */
 @media (pointer: coarse) and (orientation: portrait) {
@@ -456,8 +469,40 @@ canvas {
     border-radius: 12px;
   }
 
+  /* Overlay scrolls when panel is taller than stage (menu on small phones) */
+  .overlay {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    align-items: safe center;
+    padding: 10px;
+  }
+
+  /* Compact panel so it fits without scrolling on most phones */
+  .panel {
+    gap: 10px;
+    padding: 18px 16px 14px;
+  }
+  .title {
+    font-size: clamp(26px, 9vmin, 46px);
+  }
+  .subtitle {
+    margin: -4px 0 2px;
+    font-size: 12px;
+  }
+  .seg-btn {
+    padding: 8px 4px;
+    font-size: 12px;
+  }
+  .btn {
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+  .field-hint {
+    font-size: 11px;
+  }
+
   .dpad {
-    display: grid;
+    display: block;
   }
 
   .icon-btn {
@@ -484,7 +529,7 @@ canvas {
   }
 
   .dpad {
-    display: grid;
+    display: block;
     width: 148px;
     height: 148px;
   }

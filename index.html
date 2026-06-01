@@ -110,11 +110,12 @@
       </div>
 
       <!-- On-screen D-pad (touch devices only, shown via CSS) -->
-      <div id="dpad" class="dpad" aria-label="Directional controls">
-        <button class="dpad-btn dpad-up"    data-dx="0"  data-dy="-1" aria-label="Up">▲</button>
-        <button class="dpad-btn dpad-left"  data-dx="-1" data-dy="0"  aria-label="Left">◀</button>
-        <button class="dpad-btn dpad-right" data-dx="1"  data-dy="0"  aria-label="Right">▶</button>
-        <button class="dpad-btn dpad-down"  data-dx="0"  data-dy="1"  aria-label="Down">▼</button>
+      <!-- Single touch zone: touch position relative to center drives direction -->
+      <div id="dpad" class="dpad" role="group" aria-label="Directional controls">
+        <span class="dpad-arrow dpad-up"    aria-hidden="true">▲</span>
+        <span class="dpad-arrow dpad-left"  aria-hidden="true">◀</span>
+        <span class="dpad-arrow dpad-right" aria-hidden="true">▶</span>
+        <span class="dpad-arrow dpad-down"  aria-hidden="true">▼</span>
       </div>
     </div>
 
