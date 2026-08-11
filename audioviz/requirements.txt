@@ -1,0 +1,9 @@
+# Audio analysis. Pulls in numpy, scipy and numba.
+librosa>=0.10,<0.12
+
+# Explicit, though librosa depends on both — the renderer uses them directly.
+numpy>=1.24
+scipy>=1.10
+
+# Tests only.
+pytest>=7.0

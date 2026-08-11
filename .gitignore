@@ -3,3 +3,12 @@ dist
 .DS_Store
 *.local
 .vite
+
+# audioviz: Python artefacts and rendered media
+__pycache__/
+*.pyc
+.pytest_cache/
+audioviz/*.mp4
+audioviz/*.mp3
+audioviz/*.wav
+audioviz/*.png
